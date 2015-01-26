@@ -11,5 +11,12 @@ Available Features:
 * Can Issue API keys and tokens
 * Access to AUTH-Server and API based on Token, Secret and Domain or IP
 * Seperates system API from user API
+* Request Throttling based on WebApiThrottle
+
+## How to make it work
+
+Basic settings have to be made within the settings dialog (Properties) of the AuthService role located within the ExGripAuthServer project.
+
+
 
 
