@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+<ServiceDefinition name="ExGripAuthServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-06.2.4">
+    <WorkerRole name="AuthService" vmsize="Medium">
+        <Runtime executionContext="elevated" />
+        <!--<Imports>
+            <Import moduleName="Diagnostics" />
+        </Imports>-->
+        <Endpoints>
+            <InputEndpoint name="Http" protocol="https" port="2306" localPort="2306" certificate="exgripauthserver" />
+        </Endpoints>
+        <ConfigurationSettings>
+            <Setting name="BlobStorage" />
+            <Setting name="Database" />
+            <Setting name="LogName" />
+            <Setting name="ManagementSecret" />
+            <Setting name="MGMToken" />
+            <Setting name="MGMSecret" />
+            <Setting name="AzureCacheKey" />
+            <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ClientDiagnosticLevel" />
+        </ConfigurationSettings>
+        <Certificates>
+            <Certificate name="exgripauthserver" storeLocation="CurrentUser" storeName="My" />
+        </Certificates>
+        <Startup priority="-2">
+            <Task commandLine="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe install" executionContext="elevated" taskType="simple" />
+            <Task commandLine="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe install" executionContext="elevated" taskType="simple" />
+            <Task commandLine="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe install" executionContext="elevated" taskType="simple" />
+            <Task commandLine="Microsoft.WindowsAzure.Caching\ClientPerfCountersInstaller.exe install" executionContext="elevated" taskType="simple" />
+        </Startup>
+    </WorkerRole>
+</ServiceDefinition>

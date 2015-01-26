@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="MaxUsers" Type="int" Nullable="false" />
+          <Property Name="MaxDataCount" Type="int" Nullable="false" />
+          <Property Name="MaxTesterCount" Type="int" Nullable="false" />
+          <Property Name="OnPremisePossible" Type="bit" Nullable="false" />
+          <Property Name="DataDaysStore" Type="int" Nullable="false" />
+          <Property Name="MaxApps" Type="int" />
+          <Property Name="MaxImagesPerApp" Type="int" />
+          <Property Name="StorageQuota" Type="bigint" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+          <Property Name="IsCompany" Type="bit" />
+          <Property Name="IsTester" Type="bit" />
+          <Property Name="emailaddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="AlternateUserId" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="UserSubscriptions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="subscriptionid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SystemModelStoreContainer">
+          <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSubscriptions" EntityType="Self.UserSubscriptions" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="MaxUsers" Type="Int32" Nullable="false" />
+          <Property Name="MaxDataCount" Type="Int32" Nullable="false" />
+          <Property Name="MaxTesterCount" Type="Int32" Nullable="false" />
+          <Property Name="OnPremisePossible" Type="Boolean" Nullable="false" />
+          <Property Name="DataDaysStore" Type="Int32" Nullable="false" />
+          <Property Name="MaxApps" Type="Int32" />
+          <Property Name="MaxImagesPerApp" Type="Int32" />
+          <Property Name="StorageQuota" Type="Int64" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="56" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsCompany" Type="Boolean" />
+          <Property Name="IsTester" Type="Boolean" />
+          <Property Name="emailaddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AlternateUserId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserSubscription">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="subscriptionid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="exgripEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <EntitySet Name="UserSubscriptions" EntityType="Self.UserSubscription" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SystemModelStoreContainer" CdmEntityContainer="exgripEntities">
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="SystemModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscription">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MaxUsers" ColumnName="MaxUsers" />
+                <ScalarProperty Name="MaxDataCount" ColumnName="MaxDataCount" />
+                <ScalarProperty Name="MaxTesterCount" ColumnName="MaxTesterCount" />
+                <ScalarProperty Name="OnPremisePossible" ColumnName="OnPremisePossible" />
+                <ScalarProperty Name="DataDaysStore" ColumnName="DataDaysStore" />
+                <ScalarProperty Name="MaxApps" ColumnName="MaxApps" />
+                <ScalarProperty Name="MaxImagesPerApp" ColumnName="MaxImagesPerApp" />
+                <ScalarProperty Name="StorageQuota" ColumnName="StorageQuota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="SystemModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="AlternateUserId" ColumnName="AlternateUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsCompany" ColumnName="IsCompany" />
+                <ScalarProperty Name="IsTester" ColumnName="IsTester" />
+                <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSubscriptions">
+            <EntityTypeMapping TypeName="SystemModel.UserSubscription">
+              <MappingFragment StoreEntitySet="UserSubscriptions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="subscriptionid" ColumnName="subscriptionid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

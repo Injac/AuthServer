@@ -1,0 +1,12 @@
+C:\Users\injac\documents\visual studio 2013\Projects\ExGripAuthServer\OTP\bin\Debug\OTP.dll
+C:\Users\injac\documents\visual studio 2013\Projects\ExGripAuthServer\OTP\bin\Debug\OTP.pdb
+C:\Users\injac\documents\visual studio 2013\Projects\ExGripAuthServer\OTP\obj\Debug\OTP.dll
+C:\Users\injac\documents\visual studio 2013\Projects\ExGripAuthServer\OTP\obj\Debug\OTP.pdb
+C:\Users\Ilija\Documents\Visual Studio 2013\Projects\ExGripAuthServer\OTP\bin\Debug\OTP.dll
+C:\Users\Ilija\Documents\Visual Studio 2013\Projects\ExGripAuthServer\OTP\bin\Debug\OTP.pdb
+C:\Users\Ilija\Documents\Visual Studio 2013\Projects\ExGripAuthServer\OTP\obj\Debug\OTP.dll
+C:\Users\Ilija\Documents\Visual Studio 2013\Projects\ExGripAuthServer\OTP\obj\Debug\OTP.pdb
+D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\bin\Debug\OTP.dll
+D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\bin\Debug\OTP.pdb
+D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\obj\Debug\OTP.dll
+D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\obj\Debug\OTP.pdb

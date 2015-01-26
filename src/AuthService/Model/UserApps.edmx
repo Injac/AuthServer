@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UserAppsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="apps">
+          <Key>
+            <PropertyRef Name="idapps" />
+            <PropertyRef Name="systemuserid" />
+          </Key>
+          <Property Name="idapps" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="systemuserid" Type="int" Nullable="false" />
+          <Property Name="appname" Type="nvarchar" MaxLength="120" Nullable="false" />
+        </EntityType>
+        <EntityType Name="appusers">
+          <Key>
+            <PropertyRef Name="idappusers" />
+            <PropertyRef Name="appid" />
+          </Key>
+          <Property Name="idappusers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="int" Nullable="false" />
+          <Property Name="appSecret" Type="nvarchar" MaxLength="65" Nullable="false" />
+          <Property Name="apptoken" Type="nvarchar" MaxLength="65" Nullable="false" />
+          <Property Name="securitySoup" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="managementkeys">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mtoken" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="msecret" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OTPUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="appid" Type="int" Nullable="false" />
+          <Property Name="otpcounter" Type="bigint" Nullable="false" />
+          <Property Name="otpcreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="secret" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="seqvalid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="promotioncodes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="nvarchar(max)" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="promocode" Type="nvarchar(max)" />
+          <Property Name="redeemed" Type="bit" />
+          <Property Name="ismulticode" Type="bit" />
+          <Property Name="multicodequantity" Type="int" />
+          <Property Name="validfrom" Type="datetime" />
+          <Property Name="validuntil" Type="datetime" />
+          <Property Name="timezone" Type="nvarchar(max)" />
+          <Property Name="codevalid" Type="bit" />
+          <Property Name="GetCodeLink" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="multiredeemcount" Type="int" />
+        </EntityType>
+        <EntityType Name="systemapps">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="appname" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appname" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="apiurl" Type="nvarchar" MaxLength="320" Nullable="false" />
+          <Property Name="description" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="systemappusers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="appid" />
+            <PropertyRef Name="systemuserid" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="int" Nullable="false" />
+          <Property Name="systemuserid" Type="int" Nullable="false" />
+          <Property Name="appSecret" Type="nvarchar" MaxLength="65" Nullable="false" />
+          <Property Name="apptoken" Type="nvarchar" MaxLength="65" Nullable="false" />
+          <Property Name="securitySoup" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isSystemAccount" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="appid" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="45" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="45" />
+          <Property Name="address1" Type="nvarchar" MaxLength="45" />
+          <Property Name="address2" Type="nvarchar" MaxLength="45" />
+          <Property Name="country" Type="nvarchar" MaxLength="45" />
+          <Property Name="zipcode" Type="nvarchar" MaxLength="30" />
+          <Property Name="state" Type="nvarchar" MaxLength="45" />
+          <Property Name="email" Type="nvarchar" MaxLength="45" />
+          <Property Name="phone" Type="nvarchar" MaxLength="45" />
+          <Property Name="fax" Type="nvarchar" MaxLength="45" />
+          <Property Name="website" Type="nvarchar" MaxLength="120" />
+          <Property Name="twitter" Type="nvarchar" MaxLength="200" />
+          <Property Name="facebook" Type="nvarchar" MaxLength="200" />
+          <Property Name="linkedin" Type="nvarchar" MaxLength="200" />
+          <Property Name="age" Type="int" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="city" Type="nvarchar" MaxLength="45" />
+          <Property Name="isactive" Type="bit" Nullable="false" />
+          <Property Name="ppass" Type="nvarchar" MaxLength="2048" />
+        </EntityType>
+        <EntityContainer Name="UserAppsModelStoreContainer">
+          <EntitySet Name="apps" EntityType="Self.apps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="appusers" EntityType="Self.appusers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="managementkeys" EntityType="Self.managementkeys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OTPUsers" EntityType="Self.OTPUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="promotioncodes" EntityType="Self.promotioncodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="systemapps" EntityType="Self.systemapps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="systemappusers" EntityType="Self.systemappusers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserAppsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="userappsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="managementkeys" EntityType="UserAppsModel.managementkey" />
+          <EntitySet Name="apps" EntityType="UserAppsModel.app" />
+          <EntitySet Name="appusers" EntityType="UserAppsModel.appuser" />
+          <EntitySet Name="systemapps" EntityType="UserAppsModel.systemapp" />
+          <EntitySet Name="systemappusers" EntityType="UserAppsModel.systemappuser" />
+          <EntitySet Name="users" EntityType="UserAppsModel.user" />
+          <EntitySet Name="OTPUsers" EntityType="UserAppsModel.OTPUser" />
+          <EntitySet Name="promotioncodes" EntityType="UserAppsModel.promotioncode" />
+        </EntityContainer>
+        <EntityType Name="managementkey">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mtoken" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="msecret" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="app">
+          <Key>
+            <PropertyRef Name="idapps" />
+            <PropertyRef Name="systemuserid" />
+          </Key>
+          <Property Name="idapps" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="systemuserid" Type="Int32" Nullable="false" />
+          <Property Name="appname" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="appuser">
+          <Key>
+            <PropertyRef Name="idappusers" />
+            <PropertyRef Name="appid" />
+          </Key>
+          <Property Name="idappusers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int32" Nullable="false" />
+          <Property Name="appSecret" Type="String" Nullable="false" MaxLength="65" FixedLength="false" Unicode="true" />
+          <Property Name="apptoken" Type="String" Nullable="false" MaxLength="65" FixedLength="false" Unicode="true" />
+          <Property Name="securitySoup" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="systemapp">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="appname" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appname" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="apiurl" Type="String" Nullable="false" MaxLength="320" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="systemappuser">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="appid" />
+            <PropertyRef Name="systemuserid" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int32" Nullable="false" />
+          <Property Name="systemuserid" Type="Int32" Nullable="false" />
+          <Property Name="appSecret" Type="String" Nullable="false" MaxLength="65" FixedLength="false" Unicode="true" />
+          <Property Name="apptoken" Type="String" Nullable="false" MaxLength="65" FixedLength="false" Unicode="true" />
+          <Property Name="securitySoup" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isSystemAccount" Type="Binary" MaxLength="1" FixedLength="true" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="appid" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="firstname" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="address1" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="address2" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="zipcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="twitter" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="facebook" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="linkedin" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="city" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <Property Name="isactive" Type="Boolean" Nullable="false" />
+          <Property Name="ppass" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OTPUser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="appid" Type="Int32" Nullable="false" />
+          <Property Name="otpcounter" Type="Int64" Nullable="false" />
+          <Property Name="secret" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="seqvalid" Type="Boolean" Nullable="false" />
+          <Property Name="otpcreated" Type="DateTime" Nullable="false" Precision="7" />
+        </EntityType>
+        <EntityType Name="promotioncode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="promocode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="redeemed" Type="Boolean" />
+          <Property Name="ismulticode" Type="Boolean" />
+          <Property Name="multicodequantity" Type="Int32" />
+          <Property Name="validuntil" Type="DateTime" Precision="3" />
+          <Property Name="timezone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="codevalid" Type="Boolean" />
+          <Property Name="GetCodeLink" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="validfrom" Type="DateTime" Precision="3" />
+          <Property Name="multiredeemcount" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UserAppsModelStoreContainer" CdmEntityContainer="userappsEntities">
+          <EntitySetMapping Name="managementkeys">
+            <EntityTypeMapping TypeName="UserAppsModel.managementkey">
+              <MappingFragment StoreEntitySet="managementkeys">
+                <ScalarProperty Name="msecret" ColumnName="msecret" />
+                <ScalarProperty Name="mtoken" ColumnName="mtoken" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="apps">
+            <EntityTypeMapping TypeName="UserAppsModel.app">
+              <MappingFragment StoreEntitySet="apps">
+                <ScalarProperty Name="appname" ColumnName="appname" />
+                <ScalarProperty Name="systemuserid" ColumnName="systemuserid" />
+                <ScalarProperty Name="idapps" ColumnName="idapps" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="appusers">
+            <EntityTypeMapping TypeName="UserAppsModel.appuser">
+              <MappingFragment StoreEntitySet="appusers">
+                <ScalarProperty Name="securitySoup" ColumnName="securitySoup" />
+                <ScalarProperty Name="apptoken" ColumnName="apptoken" />
+                <ScalarProperty Name="appSecret" ColumnName="appSecret" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="idappusers" ColumnName="idappusers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systemapps">
+            <EntityTypeMapping TypeName="UserAppsModel.systemapp">
+              <MappingFragment StoreEntitySet="systemapps">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="apiurl" ColumnName="apiurl" />
+                <ScalarProperty Name="appname" ColumnName="appname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="systemappusers">
+            <EntityTypeMapping TypeName="UserAppsModel.systemappuser">
+              <MappingFragment StoreEntitySet="systemappusers">
+                <ScalarProperty Name="isSystemAccount" ColumnName="isSystemAccount" />
+                <ScalarProperty Name="securitySoup" ColumnName="securitySoup" />
+                <ScalarProperty Name="apptoken" ColumnName="apptoken" />
+                <ScalarProperty Name="appSecret" ColumnName="appSecret" />
+                <ScalarProperty Name="systemuserid" ColumnName="systemuserid" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="UserAppsModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="ppass" ColumnName="ppass" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="linkedin" ColumnName="linkedin" />
+                <ScalarProperty Name="facebook" ColumnName="facebook" />
+                <ScalarProperty Name="twitter" ColumnName="twitter" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OTPUsers">
+            <EntityTypeMapping TypeName="UserAppsModel.OTPUser">
+              <MappingFragment StoreEntitySet="OTPUsers">
+                <ScalarProperty Name="otpcreated" ColumnName="otpcreated" />
+                <ScalarProperty Name="seqvalid" ColumnName="seqvalid" />
+                <ScalarProperty Name="secret" ColumnName="secret" />
+                <ScalarProperty Name="otpcounter" ColumnName="otpcounter" />
+                <ScalarProperty Name="appid" ColumnName="appid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promotioncodes">
+            <EntityTypeMapping TypeName="UserAppsModel.promotioncode">
+              <MappingFragment StoreEntitySet="promotioncodes">
+                <ScalarProperty Name="multiredeemcount" ColumnName="multiredeemcount" />
+                <ScalarProperty Name="validfrom" ColumnName="validfrom" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="GetCodeLink" ColumnName="GetCodeLink" />
+                <ScalarProperty Name="codevalid" ColumnName="codevalid" />
+                <ScalarProperty Name="timezone" ColumnName="timezone" />
+                <ScalarProperty Name="validuntil" ColumnName="validuntil" />
+                <ScalarProperty Name="multicodequantity" ColumnName="multicodequantity" />
+                <ScalarProperty Name="ismulticode" ColumnName="ismulticode" />
+                <ScalarProperty Name="redeemed" ColumnName="redeemed" />
+                <ScalarProperty Name="promocode" ColumnName="promocode" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ServiceConfiguration serviceName="ExGripAuthServer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="AuthService">
+    <Instances count="2" />
+    <ConfigurationSettings>
+      <Setting name="BlobStorage" value="UseDevelopmentStorage=true" />
+      <Setting name="Database" value="Server=tcp:cix56rv521.database.windows.net,1433;Database=exgrip;User ID=exgrip@cix56rv521;Password=2306EmS2007#;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" />
+      <Setting name="LogName" value="storagelog" />
+      <Setting name="ManagementSecret" value="c%eU;rxK3ZP+hWP=%&quot;$uY?{^*&gt;shS}t/hV-XqQ[#-%L[Gz*&gt;Mh-M+;pjtAZ&lt;RLkcq9a&lt;fajV*2bZx7&gt;^zaR=z.D!pf.?_p&gt;afG)WuddsVm&quot;!jS+?!&gt;NFh*JWRT,E[HyT=" />
+      <Setting name="MGMToken" value="uVBFlgLhEe75X2gGYRTQGp4atKWZMFsbKbd4e6l" />
+      <Setting name="MGMSecret" value="JMZEPCXL2K+zXp7SzefPh5Jluu6aXtWwKIXFBquYUcvj" />
+      <Setting name="AzureCacheKey" value="YWNzOmh0dHBzOi8vZXhncmlwMzM4MC1jYWNoZS5hY2Nlc3Njb250cm9sLndpbmRvd3MubmV0Ly9XUkFQdjAuOS8mb3duZXImUUdXNFFucEhKMlVlZG1FdHhMdEFDMUdmSlBIS001eXJ2T2M3emx5b05yND0maHR0cDovL2V4Z3JpcC5jYWNoZS53aW5kb3dzLm5ldC8=" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Caching.ClientDiagnosticLevel" value="1" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="exgripauthserver" thumbprint="55A99500F83384CB7CA34E65D7248778C08645F6" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>
