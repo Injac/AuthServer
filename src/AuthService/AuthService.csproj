@@ -200,7 +200,6 @@
     <Compile Include="Controller\AppManagmentController.cs" />
     <Compile Include="Controller\OtpController.cs" />
     <Compile Include="Controller\PromotionCodesController.cs" />
-    <Compile Include="Controller\PromotionCodesOdata.cs" />
     <Compile Include="Controller\StorageController.cs" />
     <Compile Include="Controller\UserAppUserLogin.cs" />
     <Compile Include="CsvMappings\PromotionCodesCSVMapper.cs" />

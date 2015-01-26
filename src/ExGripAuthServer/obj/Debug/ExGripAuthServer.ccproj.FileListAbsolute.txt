@@ -58,3 +58,5 @@ C:\Users\injac\documents\visual studio 2013\Projects\ExGripAuthServer\ExGripAuth
 C:\Users\injac\documents\visual studio 2013\Projects\ExGripAuthServer\ExGripAuthServer\obj\Debug\AuthService\zh-Hant\System.Spatial.resources.dll
 D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\ExGripAuthServer\bin\Debug\ServiceConfiguration.cscfg
 D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\ExGripAuthServer\bin\Debug\ServiceDefinition.csdef
+G:\Projects\ExGrip\OpenSourced\AutServer\src\ExGripAuthServer\bin\Debug\ServiceConfiguration.cscfg
+G:\Projects\ExGrip\OpenSourced\AutServer\src\ExGripAuthServer\bin\Debug\ServiceDefinition.csdef

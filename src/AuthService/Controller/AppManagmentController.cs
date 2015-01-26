@@ -18,14 +18,22 @@ namespace AuthService.Controller
     /// <summary>
     /// Control user and system apps.
     /// </summary>
-     [EnableCors(origins: "http://www.appadditives.com", headers: "*", methods: "*")]
+    [EnableCors(origins: "[YOUR ORIGIN]", headers: "*", methods: "*")]
     public class AppManagmentController : ApiController
     {
 
         public class IncomingData
         {
-            public int systemuserid { get; set; }
-            public int appid { get; set; }
+            public int systemuserid
+            {
+                get;
+                set;
+            }
+            public int appid
+            {
+                get;
+                set;
+            }
         }
 
         #region SystemApps
@@ -65,7 +73,7 @@ namespace AuthService.Controller
                     if (!userapps.systemapps.Any(a => a.id == sysappid))
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                             "System application does not exist");
+                                                           "System application does not exist");
                     }
 
                     else
@@ -98,7 +106,7 @@ namespace AuthService.Controller
                             catch (Exception ex)
                             {
                                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                                     String.Format("Database error. Exception:{1}", ex.Message));
+                                                                   String.Format("Database error. Exception:{1}", ex.Message));
                             }
 
                             return Request.CreateResponse<Model.systemappuser>(sysAppUserEntry);
@@ -125,7 +133,7 @@ namespace AuthService.Controller
                             catch (Exception ex)
                             {
                                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                                     String.Format("Database error. Exception:{1}", ex.Message));
+                                                                   String.Format("Database error. Exception:{1}", ex.Message));
                             }
 
                             return Request.CreateResponse<Model.systemappuser>(sysAppUser);
@@ -165,47 +173,54 @@ namespace AuthService.Controller
             }
 
             return await Task.Run<systemappuser>(() =>
-             {
-                 try
-                 {
-                     using (var systemapps = new userappsEntities())
-                     {
-                         using (var system = new Model.exgripEntities())
-                         {
+            {
+                try
+                {
+                    using (var systemapps = new userappsEntities())
+                    {
+                        using (var system = new Model.exgripEntities())
+                        {
 
-                             var user = system.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+                            var user = system.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
 
-                             var sysApp = systemapps.systemapps.Where(app => app.id == sysappid).FirstOrDefault();
+                            var sysApp = systemapps.systemapps.Where(app => app.id == sysappid).FirstOrDefault();
 
-                             if ((user != null) && (sysApp != null))
-                             {
+                            if ((user != null) && (sysApp != null))
+                            {
 
-                                 var systemAppUser = systemapps.systemappusers.Where(sysusr => sysusr.appid == sysappid && sysusr.systemuserid == userId).FirstOrDefault();
-                                 if (systemAppUser != null)
-                                 {
-                                     return new systemappuser() { apptoken = systemAppUser.apptoken, appSecret = systemAppUser.appSecret };
-                                 }
-                                 else
-                                 {
-                                     return null;
-                                 }
-                             }
-                             else
-                             {
-                                 return null;
-                             }
+                                var systemAppUser = systemapps.systemappusers.Where(sysusr => sysusr.appid == sysappid && sysusr.systemuserid == userId).FirstOrDefault();
 
-                         }
+                                if (systemAppUser != null)
+                                {
+                                    return new systemappuser()
+                                    {
+                                        apptoken = systemAppUser.apptoken, appSecret = systemAppUser.appSecret
+                                    };
+                                }
 
-                     }
-                 }
-                 catch (Exception ex)
-                 {
+                                else
+                                {
+                                    return null;
+                                }
+                            }
 
-                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
-                 }
+                            else
+                            {
+                                return null;
+                            }
 
-             });
+                        }
+
+                    }
+                }
+
+                catch (Exception ex)
+                {
+
+                    throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                }
+
+            });
         }
 
         /// <summary>
@@ -242,10 +257,10 @@ namespace AuthService.Controller
                 using (var system = new Model.exgripEntities())
                 {
                     if (!userapps.systemapps.Any(a => a.appname.ToLower().
-                                                    Equals(appname.ToLower())))
+                                                 Equals(appname.ToLower())))
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                             "System application does not exist");
+                                                           "System application does not exist");
                     }
 
                     else
@@ -253,7 +268,7 @@ namespace AuthService.Controller
                         var sysAppUser = system.UserProfiles.Where(sus =>
                                          sus.UserName.ToLower().Equals(userName.ToLower())).FirstOrDefault();
                         var sysApp = userapps.systemapps.Where(a => a.appname.ToLower().
-                                     Equals(appname.ToLower())).FirstOrDefault();
+                                                               Equals(appname.ToLower())).FirstOrDefault();
 
                         if (sysAppUser == null)
                         {
@@ -269,11 +284,13 @@ namespace AuthService.Controller
                                 userapps.ChangeTracker.DetectChanges();
                                 sysUserInApp = userapps.systemappusers.Where(
                                                    sa => sa.appid == sysApp.id && sa.systemuserid == sysAppUser.UserId).FirstOrDefault();
+
                                 if (sysUserInApp == null)
                                 {
                                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                                 "System app user cannot be found.");
+                                                                       "System app user cannot be found.");
                                 }
+
                                 userapps.systemappusers.Remove(sysUserInApp);
                                 await userapps.SaveChangesAsync();
                             }
@@ -281,7 +298,7 @@ namespace AuthService.Controller
                             catch (Exception ex)
                             {
                                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                                     String.Format("Database error. Exception:{0}", ex.Message));
+                                                                   String.Format("Database error. Exception:{0}", ex.Message));
                             }
 
                             return Request.CreateResponse<Model.systemappuser>(sysUserInApp);
@@ -291,7 +308,7 @@ namespace AuthService.Controller
             }
         }
 
-       
+
 
         /// <summary>
         /// Deletes the system application.
@@ -312,7 +329,7 @@ namespace AuthService.Controller
             using (var userapps = new Model.userappsEntities())
             {
                 if (!userapps.systemapps.Any(a => a.appname.ToLower().
-                                                Equals(appName.ToLower())))
+                                             Equals(appName.ToLower())))
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "System app does not exist");
                 }
@@ -323,7 +340,7 @@ namespace AuthService.Controller
                     {
                         userapps.ChangeTracker.DetectChanges();
                         var sysApp = userapps.systemapps.Where(sa => sa.appname.ToLower().Equals(
-                                         appName.ToLower())).FirstOrDefault();
+                                appName.ToLower())).FirstOrDefault();
                         userapps.systemapps.Remove(sysApp);
                         await userapps.SaveChangesAsync();
                     }
@@ -331,7 +348,7 @@ namespace AuthService.Controller
                     catch (Exception ex)
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                             String.Format("Database error. Exception:{1}", ex.Message));
+                                                           String.Format("Database error. Exception:{1}", ex.Message));
                     }
 
                     return Request.CreateResponse<string>(appName);
@@ -366,7 +383,7 @@ namespace AuthService.Controller
             using (var userapps = new Model.userappsEntities())
             {
                 if (userapps.systemapps.Any(a => a.appname.ToLower().
-                                               Equals(app.appname.ToLower())))
+                                            Equals(app.appname.ToLower())))
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "System app already exists");
                 }
@@ -383,7 +400,7 @@ namespace AuthService.Controller
                     catch (Exception ex)
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                             String.Format("Database error. Exception:{1}", ex.Message));
+                                                           String.Format("Database error. Exception:{1}", ex.Message));
                     }
 
                     return Request.CreateResponse<Model.systemapp>(app);
@@ -435,10 +452,12 @@ namespace AuthService.Controller
                 using (var userApps = new userappsEntities())
                 {
                     var sysApp = userApps.systemapps.Where(a => a.appname.ToLower().Equals(appName.ToLower())).FirstOrDefault();
+
                     if (sysApp != null)
                     {
                         return Request.CreateResponse<systemapp>(sysApp);
                     }
+
                     else
                     {
                         return Request.CreateResponse(HttpStatusCode.OK, "No such system app available.");
@@ -510,12 +529,12 @@ namespace AuthService.Controller
                     catch (Exception ex)
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                             String.Format("Database error. Exception:{1}", ex.Message));
+                                                           String.Format("Database error. Exception:{1}", ex.Message));
                     }
                 }
             }
             return Request.CreateResponse<string>(HttpStatusCode.OK,
-                                                    "User Appplication was deleted successfully.");
+                                                  "User Appplication was deleted successfully.");
         }
         /// <summary>
         /// Creates the user application.
@@ -547,12 +566,16 @@ namespace AuthService.Controller
                             {
                                 uapps.ChangeTracker.DetectChanges();
 
-                                newApp = new app() { appname = appName, systemuserid = systemuserid };
+                                newApp = new app()
+                                {
+                                    appname = appName, systemuserid = systemuserid
+                                };
 
                                 uapps.apps.Add(newApp);
 
                                 await uapps.SaveChangesAsync();
                             }
+
                             catch (Exception ex)
                             {
 
@@ -560,6 +583,7 @@ namespace AuthService.Controller
                             }
                         }
                     }
+
                     else
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Systemuser does not exist");
@@ -603,7 +627,7 @@ namespace AuthService.Controller
                 catch (Exception ex)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                         String.Format("Database error. Exception:{1}", ex.Message));
+                                                       String.Format("Database error. Exception:{1}", ex.Message));
                 }
             }
             return Request.CreateResponse<string>(HttpStatusCode.OK, "App user deleted successfully.");
@@ -640,7 +664,7 @@ namespace AuthService.Controller
                 else
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
-                                                         String.Format("Database error. Could not create application user."));
+                                                       String.Format("Database error. Could not create application user."));
                 }
             }
         }
@@ -697,10 +721,12 @@ namespace AuthService.Controller
                                 else
                                 {
                                     var usrApp = appsByUser.FirstOrDefault();
+
                                     if (usrApp == null)
                                     {
                                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User has no apps so far.");
                                     }
+
                                     return Request.CreateResponse<app>(usrApp);
                                 }
                             }
@@ -713,7 +739,7 @@ namespace AuthService.Controller
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "No userapps available");
         }
 
-               
+
 
         /// <summary>
         /// Gets the user application.
@@ -738,10 +764,12 @@ namespace AuthService.Controller
                 using (var userApps = new userappsEntities())
                 {
                     var sysApp = userApps.apps.Where(a => a.appname.ToLower().Equals(appName.ToLower())).FirstOrDefault();
+
                     if (sysApp != null)
                     {
                         return Request.CreateResponse<app>(sysApp);
                     }
+
                     else
                     {
                         return Request.CreateResponse(HttpStatusCode.OK, "No such user app available.");
@@ -761,18 +789,22 @@ namespace AuthService.Controller
             string userName = data.userName;
 
             #region checkParameters
+
             if (appId <= 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Application id cannot be 0 or negative.");
             }
+
             if (string.IsNullOrEmpty(userName))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Username cannot be null or empty.");
             }
+
             if (string.IsNullOrEmpty(password))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Password cannot be null or empty.");
             }
+
             #endregion
 
             //Generate authentication data
@@ -780,9 +812,11 @@ namespace AuthService.Controller
             using (var userApps = new userappsEntities())
             {
                 userApps.ChangeTracker.DetectChanges();
+
                 try
                 {
                     var userExists = userApps.users.Any(uau => uau.username.ToLower().Equals(userName.ToLower()) && uau.appid == appId);
+
                     if (userExists)
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User already exists.");
@@ -790,7 +824,10 @@ namespace AuthService.Controller
 
                     var pwd = await authManger.GeneratePasswordSalt(userName, password);
 
-                    var user = new user() { username = userName, password = pwd, appid = appId };
+                    var user = new user()
+                    {
+                        username = userName, password = pwd, appid = appId
+                    };
 
                     userApps.users.Add(user);
 
@@ -799,6 +836,7 @@ namespace AuthService.Controller
                     return Request.CreateResponse<user>(user);
 
                 }
+
                 catch (Exception ex)
                 {
 
@@ -822,18 +860,22 @@ namespace AuthService.Controller
             int appId = data.appId;
 
             #region checkParameters
+
             if (userId <= 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "External User id cannot be 0 or negative.");
             }
+
             if (appId <= 0)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "User app id cannot be 0 or negative.");
             }
+
             if (string.IsNullOrEmpty(extUserName))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "External Username cannot be null or empty.");
             }
+
             #endregion
 
             //Generate authentication data
@@ -841,10 +883,12 @@ namespace AuthService.Controller
             using (var userApps = new userappsEntities())
             {
                 userApps.ChangeTracker.DetectChanges();
+
                 try
                 {
                     var extUser = userApps.users.Where(uau => uau.iduser ==
-                        userId && uau.username.ToLower().Equals(extUserName.ToLower()) && uau.appid == appId).FirstOrDefault();
+                                                       userId && uau.username.ToLower().Equals(extUserName.ToLower()) && uau.appid == appId).FirstOrDefault();
+
                     if (extUser != null)
                     {
                         userApps.users.Remove(extUser);
@@ -853,12 +897,14 @@ namespace AuthService.Controller
 
                         return Request.CreateResponse<user>(extUser);
                     }
+
                     else
                     {
                         return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "External App user does not exist");
                     }
 
                 }
+
                 catch (Exception ex)
                 {
 
