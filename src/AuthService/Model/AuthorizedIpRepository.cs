@@ -13,8 +13,9 @@ namespace AuthService.Model
 
             var ips = new List<string>();
 
-            ips.Add("138.91.171.145");
+            ips.Add("[WEBSERVER-IP]");
 
+            //For debugging purposes only
             //ips.Add("127.0.0.1");
             //ips.Add("::1");
 
