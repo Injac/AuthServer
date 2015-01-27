@@ -72,7 +72,7 @@ Let's start with the security related ones:
 * **/Model/AdminServices.cs** - Controller actions that can only be called with system API access
 * **/Security/Security.cs** - Secure Hash creation and password validation
 * **/Security/User.cs** - User related security data
-* **/Security/UserAppAuthenticationManager.cs** - Token creation, validation, encrpytion, decryption based on SSL-Certificates (use the existing certificate & private key only for testing! Generate your own!)
+* **/Security/UserAppAuthenticationManager.cs** - Token creation, validation, encryption, de-cryption, based on SSL-Certificates (use the existing certificate & private key only for testing! Generate your own!)
 
 ### Helpers
 
