@@ -12,7 +12,7 @@ Available Features:
 * Access to AUTH-Server and API based on Token, Secret and Domain or IP
 * Seperates system API from user API
 * Request Throttling based on WebApiThrottle
-* The system can issue OTP - or One Time Codes
+* The system can issue OTP's (One Time Codes)
 
 ## How to make it work
 
@@ -76,7 +76,7 @@ Let's start with the security related ones:
 
 ### Helpers
 
-* **/Helpers/DateHelper.cs** - Maps from TZDB (aka IOANA, Olson, or zoneinfo) to Windows based time-zone id's
+* **/Helpers/DateHelper.cs** - Maps from TZDB (aka IANA, Olson, or zoneinfo) to Windows based time-zone id's
 * **/Helpers/WordGenerator.cs** - Generates simple random words of a specific lenght
 
 ### Logging
