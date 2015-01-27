@@ -1,4 +1,4 @@
-# ExGrip-AuthServer
+# AuthServer
 
 This solution is part of my last startup-project to market Windows and Windows Phone apps.
 
