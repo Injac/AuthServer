@@ -1,6 +1,6 @@
 # ExGrip-AuthServer
 
-This project is part of my last startup-solution to market Windows and Windows Phone apps.
+This solution is part of my last startup-project to market Windows and Windows Phone apps.
 
 It represents the Authentication-Server that was used as a kind of Guardian between the services and the callers that needed authentication to access the API's.
 
