@@ -36,7 +36,7 @@ All of these values are simply hardcoded values and need to be present:
 Within the **Model** folder you will find 2 Entity Framework models (Model First):
 
 * **UserApps.edmx** - this is the model you need. Generate your database from that one. This is the database you will need as mentioned in section "How to make it work"
-* **SystemModel.edmx** - this is an optional model. You don't need it for the Auth-Server - it was designed for future use.
+* **SystemModel.edmx** - Connection to the user-backend
 
 ### Quick overview of the tables used
 
@@ -55,7 +55,7 @@ The database-model is fairly simple. As you can see, there are no hard-coded rel
 
 Yes, some tables don't belong there, but I have put them there for security reasons. I have installed different tables in different databases to devide them in general from each other.
 
-You may find for example a system-user-id here, but no real-system-user data, or even a connection to the system-user-database. It's all done via API-Calls. This data was kept strictly separate.
+
 
 ## Important classes and files
 
