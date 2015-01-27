@@ -14,7 +14,7 @@ using WebApiThrottle;
 namespace AuthService.OwinStartup
 {
     /// <summary>
-    /// Class that is responsible to fire 
+    /// Class that is responsible to fire
     /// up the owin host.
     /// </summary>
     public class Startup
@@ -30,7 +30,7 @@ namespace AuthService.OwinStartup
                 "Default",
                 "{controller}/{action}/{id}",
                 new { id = RouteParameter.Optional }
-              );
+            );
 
             //ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             //builder.EntitySet<promotioncode>("promotioncodes");
@@ -49,11 +49,12 @@ namespace AuthService.OwinStartup
                 Policy = new ThrottlePolicy(perSecond: 30, perMinute: 500, perHour: 7200)
                 {
                     IpThrottling = true,
-#if DEBUG
+                    #if DEBUG
                     IpWhitelist = new List<string> { "127.0.0.1-127.0.0.1"}
-#else
+                    #else
+                    //ADD YOUR IP'S here
                     IpWhitelist = new List<string> { "138.91.171.145-138.91.171.145","23.97.212.117-23.97.212.117" }
-#endif
+                    #endif
                 },
                 Repository = new AzureCacheThrottleRepository()
             });

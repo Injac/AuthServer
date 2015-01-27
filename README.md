@@ -57,4 +57,51 @@ Yes, some tables don't belong there, but I have put them there for security reas
 
 You may find for example a system-user-id here, but no real-system-user data, or even a connection to the system-user-database. It's all done via API-Calls. This data was kept strictly separate.
 
-(still in progress...)
+## Important classes and files
+
+It's important to know, which class is doing what to configure the server in more detail. This section describes the various classes and their responsibilities.
+
+### Security Related
+
+Let's start with the security related ones:
+
+* **/Filters/ApiAuthFilter.cs** - Checks general for services that want to secure their API 
+* **/Filters/IPAddressFilter.cs** - Allows access to this Auth-Server only from specific IP-Addresses
+* **/Handler/AuthHandler.cs** -  This is where user/system API keys and secrets are checked
+* **/Model/AuthorizedIpRepository.cs** - Put the authorized system-ip's in this repo
+* **/Model/AdminServices.cs** - Controller actions that can only be called with system API access
+* **/Security/Security.cs** - Secure Hash creation and password validation
+* **/Security/User.cs** - User related security data
+* **/Security/UserAppAuthenticationManager.cs** - Token creation, validation, encrpytion, decryption based on SSL-Certificates (use the existing certificate & private key only for testing! Generate your own!)
+
+### Helpers
+
+* **/Helpers/DateHelper.cs** - Maps from TZDB (aka IOANA, Olson, or zoneinfo) to Windows based time-zone id's
+* **/Helpers/WordGenerator.cs** - Generates simple random words of a specific lenght
+
+### Logging
+
+* **/Logging/Logger.cs** - Logger implementation that logs to Azure Tables
+* **/Logging/Message.cs** - TableServiceEntity that represents a log-entry
+
+## Storage
+
+The solution contains a complete system to manage storage files like directories using JSON:
+
+* **/Storage/AzureBlobStorageManager.cs** - Manages all the CRUD related task to manage Azure Storage Blobs
+* **/Storage/DirectoryQuota.cs** - Allows you to set a maximum of X MB, GB or whatever size you use
+* **/Storage/FileHelper.cs** - Allows you to get the file-size in bytes as string using P/Invoke
+* **/Storage/StorageExporter.cs** - Returns the directory-like structure (JSON) for the blobs per user 
+
+## Controllers
+
+* **/Controllers/AppManagementController.cs** - Provides the API to manage user/system apps and system-users and API users
+* **/Controllers/OtpController.cs** - Issues and de-activates OTP's (One Time Codes)
+* **/Controllers/PromotionCodesController.cs** - Promotional Codes managment
+* **/Controller/StorageController.cs** - Controller that manages the storage part mentioned in section "Storage"
+
+
+
+
+
+
