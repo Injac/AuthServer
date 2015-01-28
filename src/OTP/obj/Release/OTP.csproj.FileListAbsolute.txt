@@ -1,4 +1,0 @@
-D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\bin\Release\OTP.dll
-D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\bin\Release\OTP.pdb
-D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\obj\Release\OTP.dll
-D:\Projects\ExGrip\Azure Services\AuthenticationServer\ExGripAuthServer\OTP\obj\Release\OTP.pdb
